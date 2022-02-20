@@ -29,16 +29,17 @@ function App() {
     localStorage.setItem("contacts", stringContacts);
   }, [contacts]);
 
-  const dataSubmit = (data) => {
+  const dataSubmit = (name, number) => {
     const searchName = contacts
       .map((contactName) => contactName.name)
-      .includes(data.name);
+      .includes(name);
     if (searchName) {
-      alert(`${data.name} is already in contacts`);
+      alert(`${name} is already in contacts`);
       return;
     } else {
       const contact = {
-        ...data,
+        name,
+        number,
         id: nanoid(),
       };
       setContacts((prevState) => [contact, ...prevState]);
